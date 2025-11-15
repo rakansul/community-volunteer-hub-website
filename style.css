@@ -2,7 +2,10 @@
    Community Volunteer Hub - Main Stylesheet
    ============================================ */
 
-/* CSS Reset and Base Styles */
+/* ============================================
+   1. GLOBAL STYLES
+   (Reset, Variables, Body, Container)
+   ============================================ */
 * {
     margin: 0;
     padding: 0;
@@ -35,93 +38,6 @@ body {
     flex-direction: column;
 }
 
-/* ============================================
-   Header and Navigation
-   ============================================ */
-
-header {
-    background-color: var(--bg-white);
-    box-shadow: var(--shadow);
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-.navbar {
-    padding: 1rem 0;
-}
-
-.nav-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo h1 {
-    color: var(--primary-color);
-    font-size: 1.8rem;
-    font-weight: 700;
-}
-
-.nav-menu {
-    display: flex;
-    list-style: none;
-    gap: 2rem;
-}
-
-.nav-menu a {
-    text-decoration: none;
-    color: var(--text-dark);
-    font-weight: 500;
-    transition: color 0.3s ease;
-    padding: 0.5rem 0;
-}
-
-.nav-menu a:hover,
-.nav-menu a.active {
-    color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
-}
-
-/* Hamburger Menu */
-.hamburger {
-    display: none;
-    flex-direction: column;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 0.5rem;
-    gap: 0.25rem;
-    z-index: 1001;
-}
-
-.hamburger span {
-    width: 25px;
-    height: 3px;
-    background-color: var(--primary-color);
-    border-radius: 3px;
-    transition: all 0.3s ease;
-}
-
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* ============================================
-   Main Content
-   ============================================ */
-
 main {
     flex: 1;
 }
@@ -133,35 +49,11 @@ main {
 }
 
 /* ============================================
-   Hero Section
+   2. REUSABLE COMPONENTS
+   (Buttons, Cards, Forms, Messages, Animations)
    ============================================ */
 
-.hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: white;
-    padding: 5rem 2rem;
-    text-align: center;
-}
-
-.hero-content h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-}
-
-.hero-content p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
-    opacity: 0.95;
-}
-
-/* ============================================
-   Buttons
-   ============================================ */
-
+/* --- Buttons --- */
 .btn {
     display: inline-block;
     padding: 0.75rem 1.5rem;
@@ -213,34 +105,29 @@ main {
     display: block;
 }
 
-/* ============================================
-   Featured Opportunities Section
-   ============================================ */
-
-.featured-opportunities {
-    padding: 4rem 0;
-    background-color: var(--bg-white);
+.btn-large {
+    padding: 1rem 2.5rem;
+    font-size: 1.1rem;
+    min-width: 250px;
 }
 
-.featured-opportunities h2 {
-    text-align: center;
-    font-size: 2rem;
-    margin-bottom: 3rem;
-    color: var(--primary-color);
+.btn.active {
+    background-color: var(--secondary-color);
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.opportunities-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 2rem;
+.btn.active:hover {
+    background-color: #3d7d4f;
 }
 
+/* --- General Card Styles --- */
 .opportunity-card {
     background-color: var(--bg-white);
     border-radius: 10px;
     box-shadow: var(--shadow);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    animation: fadeInUp 0.5s ease forwards;
 }
 
 .opportunity-card:hover {
@@ -285,10 +172,266 @@ main {
     margin-bottom: 1.5rem;
 }
 
+/* --- General Form Styles --- */
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-dark);
+    font-weight: 600;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid var(--border-color);
+    border-radius: 5px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.form-group input.error {
+    border-color: var(--danger-color);
+    border-width: 2px;
+}
+
+.form-group input.error:focus {
+    border-color: var(--danger-color);
+}
+
+.error-message {
+    display: block;
+    color: var(--danger-color);
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+}
+
+/* --- Message/Notification Styles --- */
+.registration-message {
+    margin-top: 1.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    text-align: center;
+    font-weight: 500;
+    animation: slideIn 0.4s ease;
+}
+
+.registration-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 2px solid #c3e6cb;
+}
+
+.registration-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 2px solid #f5c6cb;
+}
+
+.no-results-message {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 3rem 2rem;
+    background-color: var(--bg-light);
+    border-radius: 10px;
+    margin: 2rem 0;
+}
+
+.no-results-message h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.no-results-message p {
+    color: var(--text-light);
+    font-size: 1.1rem;
+}
+
+/* --- Animations --- */
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
 /* ============================================
-   Page Header
+   3. SITE STRUCTURE
+   (Header, Navigation, Footer)
    ============================================ */
 
+/* --- Header & Navigation --- */
+header {
+    background-color: var(--bg-white);
+    box-shadow: var(--shadow);
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.navbar {
+    padding: 1rem 0;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo h1 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+
+.nav-menu {
+    display: flex;
+    list-style: none;
+    gap: 2rem;
+}
+
+.nav-menu a {
+    text-decoration: none;
+    color: var(--text-dark);
+    font-weight: 500;
+    transition: color 0.3s ease;
+    padding: 0.5rem 0;
+    text-decoration: none;
+}
+
+.nav-menu a:hover,
+.nav-menu a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+/* --- Hamburger Menu --- */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    gap: 0.25rem;
+    z-index: 1001;
+}
+
+.hamburger span {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary-color);
+    border-radius: 3px;
+    transition: all 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+    transform: rotate(45deg) translate(5px, 5px);
+}
+
+.hamburger.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(7px, -6px);
+}
+
+/* --- Footer --- */
+footer {
+    background-color: var(--primary-dark);
+    color: white;
+    padding: 3rem 0 1rem;
+    margin-top: auto;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-bottom: 2rem;
+}
+
+.footer-section h3 {
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.footer-section p {
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+    line-height: 1.8;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-section a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+}
+
+.footer-section a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    opacity: 0.8;
+}
+
+/* ============================================
+   4. PAGE-SPECIFIC STYLES
+   (Home, Opportunities, Auth, Profile, Detail)
+   ============================================ */
+
+/* --- Page Header (Opportunities, Profile) --- */
 .page-header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     color: white;
@@ -306,10 +449,53 @@ main {
     opacity: 0.9;
 }
 
-/* ============================================
-   Search and Filters
-   ============================================ */
+/* --- Home Page (Hero) --- */
+.hero {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
+    color: white;
+    padding: 5rem 2rem;
+    text-align: center;
+}
 
+.hero-content h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    opacity: 0.95;
+}
+
+/* --- Home & Opportunities Page (Card Grid) --- */
+.featured-opportunities {
+    padding: 4rem 0;
+    background-color: var(--bg-white);
+}
+
+.featured-opportunities h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 3rem;
+    color: var(--primary-color);
+}
+
+.opportunities-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 2rem;
+}
+
+.opportunities-list {
+    padding: 3rem 0;
+}
+
+/* --- Opportunities Page (Search & Filters) --- */
 .search-filters {
     background-color: var(--bg-white);
     padding: 2rem 0;
@@ -375,18 +561,7 @@ main {
     border-color: var(--primary-color);
 }
 
-/* ============================================
-   Opportunities List
-   ============================================ */
-
-.opportunities-list {
-    padding: 3rem 0;
-}
-
-/* ============================================
-   Authentication Pages
-   ============================================ */
-
+/* --- Auth Pages (Login/Register) --- */
 .auth-section {
     padding: 4rem 0;
     min-height: 60vh;
@@ -418,48 +593,6 @@ main {
     margin-bottom: 1.5rem;
 }
 
-.form-group {
-    margin-bottom: 1.5rem;
-}
-
-.form-group label {
-    display: block;
-    margin-bottom: 0.5rem;
-    color: var(--text-dark);
-    font-weight: 600;
-}
-
-.form-group input {
-    width: 100%;
-    padding: 0.75rem;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-}
-
-.form-group input:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-/* Form Validation Styles */
-.form-group input.error {
-    border-color: var(--danger-color);
-    border-width: 2px;
-}
-
-.form-group input.error:focus {
-    border-color: var(--danger-color);
-}
-
-.error-message {
-    display: block;
-    color: var(--danger-color);
-    font-size: 0.875rem;
-    margin-top: 0.25rem;
-}
-
 .forgot-password {
     color: var(--primary-color);
     text-decoration: none;
@@ -485,10 +618,7 @@ main {
     text-decoration: underline;
 }
 
-/* ============================================
-   Profile Page
-   ============================================ */
-
+/* --- Profile Page --- */
 .profile-section {
     padding: 3rem 0;
 }
@@ -581,6 +711,7 @@ main {
     border-left: 4px solid var(--primary-color);
     flex-wrap: wrap;
     gap: 1rem;
+    animation: fadeInUp 0.5s ease forwards;
 }
 
 .item-content h4 {
@@ -597,73 +728,168 @@ main {
     color: var(--text-light);
 }
 
-/* ============================================
-   Footer
-   ============================================ */
+/* --- Opportunity Detail Page --- */
+.opportunity-detail-section {
+    padding: 3rem 0;
+    min-height: 60vh;
+}
 
-footer {
-    background-color: var(--primary-dark);
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    color: var(--primary-color);
+    text-decoration: none;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.back-link:hover {
+    background-color: var(--bg-light);
+    transform: translateX(5px);
+}
+
+.opportunity-detail-card {
+    background-color: var(--bg-white);
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+}
+
+.detail-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     color: white;
-    padding: 3rem 0 1rem;
-    margin-top: auto;
+    padding: 3rem 2rem;
 }
 
-.footer-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 2rem;
+.detail-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
 }
 
-.footer-content {
+.detail-meta-top {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    font-size: 1.1rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.category-badge {
+    background-color: rgba(255, 255, 255, 0.2);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    backdrop-filter: blur(10px);
+}
+
+.detail-content {
+    padding: 3rem 2rem;
+}
+
+.detail-section {
+    margin-bottom: 3rem;
+}
+
+.detail-section h2 {
+    color: var(--primary-color);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+}
+
+.detail-text {
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.detail-info-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
 }
 
-.footer-section h3 {
-    margin-bottom: 1rem;
+.detail-info-item {
+    background-color: var(--bg-light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-right: 4px solid var(--primary-color);
+}
+
+.detail-info-item h3 {
+    color: var(--primary-color);
     font-size: 1.2rem;
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
 
-.footer-section p {
-    margin-bottom: 0.5rem;
-    opacity: 0.9;
-    line-height: 1.8;
+.detail-info-item p {
+    color: var(--text-dark);
+    line-height: 1.6;
 }
 
-.footer-section ul {
-    list-style: none;
-}
-
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
-
-.footer-section a {
-    color: white;
-    text-decoration: none;
-    opacity: 0.9;
-    transition: opacity 0.3s ease;
-}
-
-.footer-section a:hover {
-    opacity: 1;
-    text-decoration: underline;
-}
-
-.footer-bottom {
+.registration-section {
+    background-color: var(--bg-light);
+    padding: 2rem;
+    border-radius: 10px;
     text-align: center;
-    padding-top: 2rem;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    opacity: 0.8;
 }
+
 
 /* ============================================
-   Responsive Design
+   5. ACCESSIBILITY & PRINT
    ============================================ */
 
-/* Tablet Styles */
+/* --- Focus States --- */
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+    outline: 3px solid var(--primary-color);
+    outline-offset: 2px;
+}
+
+/* --- Print Styles --- */
+@media print {
+    header,
+    footer,
+    .hamburger,
+    .search-filters,
+    .registration-section,
+    .btn {
+        display: none !important;
+    }
+
+    .detail-header {
+        background: white !important;
+        color: black !important;
+        border-bottom: 2px solid #000;
+    }
+
+    .detail-info-item {
+        border: 1px solid #000;
+        page-break-inside: avoid;
+    }
+}
+
+
+/* ============================================
+   6. RESPONSIVE DESIGN
+   ============================================ */
+
+/* --- Tablet Styles --- */
 @media (max-width: 768px) {
     .nav-container {
         flex-direction: row;
@@ -756,9 +982,54 @@ footer {
     .footer-content {
         grid-template-columns: 1fr;
     }
+
+    /* Opportunity Detail Page */
+    .detail-header {
+        padding: 2rem 1.5rem;
+    }
+
+    .detail-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .detail-meta-top {
+        font-size: 0.95rem;
+        gap: 1rem;
+    }
+
+    .detail-content {
+        padding: 2rem 1.5rem;
+    }
+
+    .detail-section h2 {
+        font-size: 1.5rem;
+    }
+
+    .detail-text {
+        font-size: 1rem;
+    }
+
+    .detail-info-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .detail-info-item {
+        border-right: none;
+        border-left: 4px solid var(--primary-color);
+    }
+
+    .btn-large {
+        width: 100%;
+        min-width: auto;
+    }
+
+    .back-link {
+        margin-bottom: 1rem;
+    }
 }
 
-/* Mobile Styles */
+/* --- Mobile Styles --- */
 @media (max-width: 480px) {
     .container {
         padding: 0 1rem;
@@ -853,20 +1124,34 @@ footer {
     .footer-container {
         padding: 0 1rem;
     }
+
+    /* Opportunity Detail Page */
+    .detail-header {
+        padding: 1.5rem 1rem;
+    }
+
+    .detail-header h1 {
+        font-size: 1.5rem;
+    }
+
+    .detail-content {
+        padding: 1.5rem 1rem;
+    }
+
+    .registration-section {
+        padding: 1.5rem 1rem;
+    }
 }
 
+
 /* ============================================
-   Community Volunteer Hub - RTL Stylesheet
+   7. RTL (Right-to-Left) OVERRIDES
+   (For Arabic Language Support)
    ============================================ */
-
-/*
-  This file handles Right-to-Left (RTL) styling.
-*/
-
 body {
-  /* Ensures the font rendering is optimized for Arabic */
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+    /* Ensures the font rendering is optimized for Arabic */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 /* Flip hamburger animation */
@@ -878,17 +1163,30 @@ body {
     transform: rotate(-45deg) translate(-7px, -6px);
 }
 
-/* Flip border on mobile menu */
-@media (max-width: 768px) {
-  .nav-menu a:hover,
-  .nav-menu a.active {
-      border-left: none;
-      border-right: 4px solid var(--primary-color);
-  }
-}
-
 /* Flip profile page item border */
 .opportunity-item {
     border-left: none;
     border-right: 4px solid var(--primary-color);
+}
+
+/* Flip border on mobile menu */
+@media (max-width: 768px) {
+    .nav-menu a: hover,
+    .nav-menu a.active {
+        border-left: none;
+        border-right: 4px solid var(--primary-color);
+    }
+    
+    /* Flip detail info item border *only* on tablet/desktop RTL */
+    /* On mobile, it's already flipped by the main responsive rule */
+    .detail-info-item {
+        border-left: none;
+        border-right: 4px solid var(--primary-color);
+    }
+}
+
+/* Flip detail info item border for desktop RTL */
+.detail-info-item {
+    border-right: none;
+    border-left: 4px solid var(--primary-color);
 }
