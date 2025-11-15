@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ملفي الشخصي - مركز المتطوعين</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="nav-container">
+                <div class="logo">
+                    <h1>مركز المتطوعين</h1>
+                </div>
+                <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="nav-menu">
+                    <li><a href="index.html">الرئيسية</a></li>
+                    <li><a href="opportunities.html">الفرص</a></li>
+                    <li><a href="about.html">من نحن</a></li>
+                    <li><a href="contact.html">تواصل معنا</a></li>
+                    <li><a href="profile.html" class="active">ملفي الشخصي</a></li>
+                    <li><a href="login.html">تسجيل الخروج</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section class="page-header">
+            <div class="container">
+                <h2>أهلاً بك، جون دو!</h2>
+                <p>أدِر ملفك الشخصي وتتبع أنشطتك التطوعية</p>
+            </div>
+        </section>
+
+        <section class="profile-section">
+            <div class="container">
+                <div class="profile-content">
+                    <div class="profile-card">
+                        <h3>التفاصيل الشخصية</h3>
+                        <div class="profile-info">
+                            <div class="info-item">
+                                <strong>الاسم الأول:</strong>
+                                <span>جون</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>الاسم الأخير:</strong>
+                                <span>دو</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>البريد الإلكتروني:</strong>
+                                <span>john.doe@example.com</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-secondary">تعديل الملف الشخصي</button>
+                    </div>
+
+                    <div class="registered-opportunities">
+                        <div class="opportunities-header">
+                            <h3>الفرص المسجل بها</h3>
+                            <button id="load-events-btn" class="btn btn-primary">عرض فُرصي</button>
+                        </div>
+                        <div class="opportunities-list-profile">
+                            <p class="empty-message" style="text-align: center; color: var(--text-light); padding: 2rem; font-style: italic;">
+                                انقر على "عرض فُرصي" لعرض الفرص المسجل بها.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>من نحن</h3>
+                    <p>نصل المتطوعين بفرص هادفة لخدمة مجتمعاتهم.</p>
+                </div>
+                <div class="footer-section">
+                    <h3>روابط سريعة</h3>
+                    <ul>
+                        <li><a href="index.html">الرئيسية</a></li>
+                        <li><a href="opportunities.html">الفرص</a></li>
+                        <li><a href="about.html">من نحن</a></li>
+                        <li><a href="contact.html">تواصل معنا</a></li>
+                        <li><a href="login.html">تسجيل الدخول</a></li>
+                        <li><a href="register.html">تسجيل</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>تواصل معنا</h3>
+                    <p>البريد الإلكتروني: info@volunteerhub.org</p>
+                    <p>الهاتف: (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 مركز المتطوعين. جميع الحقوق محفوظة.</p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+</html>
