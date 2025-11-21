@@ -36,6 +36,9 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    /* Ensures the font rendering is optimized for Arabic */
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
 
 main {
@@ -329,7 +332,6 @@ header {
     font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0;
-    text-decoration: none;
 }
 
 .nav-menu a:hover,
@@ -1033,6 +1035,41 @@ select:focus-visible {
     .back-link {
         margin-bottom: 1rem;
     }
+    
+    .about-card {
+         padding: 2rem;
+     }
+
+     .about-card h2 {
+         font-size: 1.75rem;
+     }
+
+     .features-grid {
+         grid-template-columns: 1fr;
+         gap: 1.5rem;
+     }
+
+     /* Contact Page Responsive */
+     .contact-content {
+         /* No grid here anymore, just inherit column flex */
+         gap: 1.5rem;
+     }
+
+     .error-code {
+         font-size: 6rem;
+     }
+
+     .error-content h1 {
+         font-size: 2rem;
+     }
+
+     .error-actions {
+         flex-direction: column;
+     }
+
+     .error-actions .btn {
+         width: 100%;
+     }
 }
 
 /* --- Mobile Styles --- */
@@ -1147,6 +1184,26 @@ select:focus-visible {
     .registration-section {
         padding: 1.5rem 1rem;
     }
+    
+    .about-card {
+         padding: 1.5rem;
+     }
+
+     .about-card h2 {
+         font-size: 1.5rem;
+     }
+
+     .contact-card {
+         padding: 1.5rem;
+     }
+
+     .error-code {
+         font-size: 5rem;
+     }
+
+     .error-content h1 {
+         font-size: 1.75rem;
+     }
 }
 
 
@@ -1154,12 +1211,6 @@ select:focus-visible {
    7. RTL (Right-to-Left) OVERRIDES
    (For Arabic Language Support)
    ============================================ */
-body {
-    /* Ensures the font rendering is optimized for Arabic */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
-
 /* Flip hamburger animation */
 .hamburger.active span:nth-child(1) {
     transform: rotate(45deg) translate(-5px, 5px);
@@ -1256,7 +1307,7 @@ body {
 
 .features-grid {
      display: grid;
-     grid-template-columns: repeat(4 , 2, minmax(250px, 1fr));
+     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
      gap: 2rem;
      margin-top: 1.5rem;
  }
@@ -1280,32 +1331,6 @@ body {
      margin: 0;
  }
 
-.stats-grid {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-     gap: 2rem;
-     margin-top: 1.5rem;
- }
-
-.stat-item {
-     text-align: center;
-     padding: 2rem;
-     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-     border-radius: 10px;
-     color: white;
- }
-
-.stat-number {
-     font-size: 3rem;
-     font-weight: 700;
-     margin-bottom: 0.5rem;
- }
-
-.stat-label {
-     font-size: 1.1rem;
-     opacity: 0.95;
- }
-
 /* ============================================
    9. CONTACT PAGE STYLES
    ============================================ */
@@ -1314,16 +1339,13 @@ body {
      padding: 3rem 0;
  }
 
+/* Updated: Simple vertical stack layout */
 .contact-content {
-     display: grid;
-     flex-direction: row;
-     gap: 3rem;
- }
-
-.contact-info {
      display: flex;
-     flex-direction: row;
+     flex-direction: column; /* Stack vertically */
      gap: 2rem;
+     max-width: 800px; /* Prevent it from getting too wide */
+     margin: 0 auto; /* Center the column */
  }
 
 .contact-card {
@@ -1363,36 +1385,6 @@ body {
      color: var(--text-dark);
      margin: 0;
      line-height: 1.6;
- }
-
-.social-links {
-     display: flex;
-     flex-wrap: wrap;
-     gap: 1rem;
- }
-
-.social-link {
-     display: inline-block;
-     padding: 0.75rem 1.5rem;
-     background-color: var(--primary-color);
-     color: white;
-     text-decoration: none;
-     border-radius: 5px;
-     font-weight: 600;
-     transition: all 0.3s ease;
- }
-
-.social-link:hover {
-     background-color: var(--primary-dark);
-     transform: translateY(-2px);
-     box-shadow: var(--shadow-hover);
- }
-
-.contact-form-container {
-     background-color: var(--bg-white);
-     padding: 2rem;
-     border-radius: 10px;
-     box-shadow: var(--shadow);
  }
 
 .contact-form textarea {
@@ -1495,76 +1487,4 @@ body {
 .error-suggestions a:hover {
      color: var(--primary-dark);
      text-decoration: underline;
- }
-
-/* Responsive styles for new pages */
-@media (max-width: 768px) {
-     .about-card {
-         padding: 2rem;
-     }
-
-     .about-card h2 {
-         font-size: 1.75rem;
-     }
-
-     .features-grid {
-         grid-template-columns: 1fr;
-         gap: 1.5rem;
-     }
-
-     .stats-grid {
-         grid-template-columns: repeat(2, 1fr);
-         gap: 1.5rem;
-     }
-
-     .stat-number {
-         font-size: 2.5rem;
-     }
-
-     .contact-content {
-         grid-template-columns: 1fr;
-         gap: 2rem;
-     }
-
-     .error-code {
-         font-size: 6rem;
-     }
-
-     .error-content h1 {
-         font-size: 2rem;
-     }
-
-     .error-actions {
-         flex-direction: column;
-     }
-
-     .error-actions .btn {
-         width: 100%;
-     }
- }
-
-@media (max-width: 480px) {
-     .about-card {
-         padding: 1.5rem;
-     }
-
-     .about-card h2 {
-         font-size: 1.5rem;
-     }
-
-     .stats-grid {
-         grid-template-columns: 1fr;
-     }
-
-     .contact-card {
-         padding: 1.5rem;
-     }
-
-     .error-code {
-         font-size: 5rem;
-     }
-
-     .error-content h1 {
-         font-size: 1.75rem;
-     }
  }
