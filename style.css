@@ -1,18 +1,7 @@
 /* ============================================
-   Community Volunteer Hub - Main Stylesheet
+   1. GLOBAL STYLES & VARIABLES
    ============================================ */
-
-/* ============================================
-   1. GLOBAL STYLES
-   (Reset, Variables, Body, Container)
-   ============================================ */
-   * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-:root {
+   :root {
     --primary-color: #2c5f7c;
     --primary-dark: #1e4255;
     --primary-light: #3d7fa3;
@@ -28,6 +17,12 @@
     --shadow-hover: 0 4px 16px rgba(0, 0, 0, 0.15);
 }
 
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     line-height: 1.6;
@@ -36,7 +31,6 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* Ensures the font rendering is optimized for Arabic */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 }
@@ -53,7 +47,6 @@ main {
 
 /* ============================================
    2. REUSABLE COMPONENTS
-   (Buttons, Cards, Forms, Messages, Animations)
    ============================================ */
 
 /* --- Buttons --- */
@@ -91,6 +84,20 @@ main {
     transform: translateY(-2px);
     box-shadow: var(--shadow-hover);
 }
+.btn-search {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: var(--primary-color);
+    border: none;
+}
+
+.btn-search:hover {
+    background-color: var(--primary-dark);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-hover);
+}
 
 .btn-danger {
     background-color: var(--danger-color);
@@ -123,7 +130,7 @@ main {
     background-color: #3d7d4f;
 }
 
-/* --- General Card Styles --- */
+/* --- Cards --- */
 .opportunity-card {
     background-color: var(--bg-white);
     border-radius: 10px;
@@ -131,6 +138,9 @@ main {
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     animation: fadeInUp 0.5s ease forwards;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .opportunity-card:hover {
@@ -140,6 +150,9 @@ main {
 
 .card-content {
     padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
 }
 
 .opportunity-card h3 {
@@ -169,13 +182,10 @@ main {
     color: var(--text-light);
     margin-bottom: 1.5rem;
     line-height: 1.6;
+    flex-grow: 1;
 }
 
-.opportunity-card.detailed p {
-    margin-bottom: 1.5rem;
-}
-
-/* --- General Form Styles --- */
+/* --- Forms --- */
 .form-group {
     margin-bottom: 1.5rem;
 }
@@ -187,27 +197,29 @@ main {
     font-weight: 600;
 }
 
-.form-group input {
+.form-group input,
+.form-group textarea,
+.form-group select {
     width: 100%;
     padding: 0.75rem;
     border: 2px solid var(--border-color);
     border-radius: 5px;
     font-size: 1rem;
     transition: border-color 0.3s ease;
+    background-color: var(--bg-white);
 }
 
-.form-group input:focus {
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
     outline: none;
     border-color: var(--primary-color);
 }
 
-.form-group input.error {
+.form-group input.error,
+.form-group textarea.error {
     border-color: var(--danger-color);
     border-width: 2px;
-}
-
-.form-group input.error:focus {
-    border-color: var(--danger-color);
 }
 
 .error-message {
@@ -217,7 +229,7 @@ main {
     margin-top: 0.25rem;
 }
 
-/* --- Message/Notification Styles --- */
+/* --- Messages --- */
 .registration-message {
     margin-top: 1.5rem;
     padding: 1rem 1.5rem;
@@ -254,38 +266,19 @@ main {
     font-size: 1.5rem;
 }
 
-.no-results-message p {
-    color: var(--text-light);
-    font-size: 1.1rem;
-}
-
 /* --- Animations --- */
 @keyframes slideIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 @keyframes fadeInUp {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
 }
-
 
 /* ============================================
    3. SITE STRUCTURE
-   (Header, Navigation, Footer)
    ============================================ */
 
 /* --- Header & Navigation --- */
@@ -310,14 +303,16 @@ header {
     align-items: center;
 }
 
+.logo a {
+    text-decoration: none;
+    display: block;
+}
+
 .logo h1 {
     color: var(--primary-color);
     font-size: 1.8rem;
     font-weight: 700;
-    text-decoration: none;
-}
-.logo a{
-    text-decoration: none;
+    margin: 0;
 }
 
 .nav-menu {
@@ -332,12 +327,13 @@ header {
     font-weight: 500;
     transition: color 0.3s ease;
     padding: 0.5rem 0;
+    border-bottom: 2px solid transparent;
 }
 
 .nav-menu a:hover,
 .nav-menu a.active {
     color: var(--primary-color);
-    border-bottom: 2px solid var(--primary-color);
+    border-bottom-color: var(--primary-color);
 }
 
 /* --- Hamburger Menu --- */
@@ -360,16 +356,15 @@ header {
     transition: all 0.3s ease;
 }
 
+.hamburger.active span:nth-child(2) { opacity: 0; }
+
+
+
 .hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
+    transform: translateY(7px) rotate(45deg);
 }
-
-.hamburger.active span:nth-child(2) {
-    opacity: 0;
-}
-
 .hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
+    transform: translateY(-7px) rotate(-45deg);
 }
 
 /* --- Footer --- */
@@ -391,6 +386,8 @@ footer {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
     margin-bottom: 2rem;
+    margin-right: 2rem;
+    margin-left: 2rem
 }
 
 .footer-section h3 {
@@ -404,13 +401,9 @@ footer {
     line-height: 1.8;
 }
 
-.footer-section ul {
-    list-style: none;
-}
+.footer-section ul { list-style: none; }
 
-.footer-section ul li {
-    margin-bottom: 0.5rem;
-}
+.footer-section ul li { margin-bottom: 0.5rem; }
 
 .footer-section a {
     color: white;
@@ -433,34 +426,18 @@ footer {
 
 /* ============================================
    4. PAGE-SPECIFIC STYLES
-   (Home, Opportunities, Auth, Profile, Detail)
    ============================================ */
 
-/* --- Page Header (Opportunities, Profile) --- */
-.page-header {
+/* --- Hero & Page Headers --- */
+.hero, .page-header, .detail-header {
     background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
     color: white;
-    padding: 3rem 0;
     text-align: center;
 }
 
-.page-header h2 {
-    font-size: 2.2rem;
-    margin-bottom: 0.5rem;
-}
-
-.page-header p {
-    font-size: 1.1rem;
-    opacity: 0.9;
-}
-
-/* --- Home Page (Hero) --- */
-.hero {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: white;
-    padding: 5rem 2rem;
-    text-align: center;
-}
+.hero { padding: 5rem 2rem; }
+.page-header { padding: 3rem 0; }
+.detail-header { padding: 3rem 2rem; }
 
 .hero-content h2 {
     font-size: 2.5rem;
@@ -472,13 +449,15 @@ footer {
     font-size: 1.2rem;
     margin-bottom: 2rem;
     max-width: 600px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-inline: auto; /* Logical centering */
     opacity: 0.95;
 }
 
-/* --- Home & Opportunities Page (Card Grid) --- */
-.featured-opportunities {
+.page-header h2 { font-size: 2.2rem; margin-bottom: 0.5rem; }
+.page-header p { font-size: 1.1rem; opacity: 0.9; }
+
+/* --- Opportunities Grid --- */
+.featured-opportunities, .opportunities-list {
     padding: 4rem 0;
     background-color: var(--bg-white);
 }
@@ -496,11 +475,7 @@ footer {
     gap: 2rem;
 }
 
-.opportunities-list {
-    padding: 3rem 0;
-}
-
-/* --- Opportunities Page (Search & Filters) --- */
+/* --- Search Filters --- */
 .search-filters {
     background-color: var(--bg-white);
     padding: 2rem 0;
@@ -518,66 +493,48 @@ footer {
     gap: 0.5rem;
 }
 
-.search-bar input {
+.search-bar input { 
     flex: 1;
-    padding: 0.75rem;
-    border: 2px solid var(--border-color);
-    border-radius: 5px;
-    font-size: 1rem;
-}
-
-.search-bar input:focus {
-    outline: none;
+    padding: 0.5rem;
+    border-radius: 0.5rem;
     border-color: var(--primary-color);
-}
-
-.search-btn {
-    padding: 0.75rem 1.5rem;
-    background-color: var(--primary-color);
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-}
-
-.search-btn:hover {
-    background-color: var(--primary-dark);
-}
+ }
 
 .filter-options {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
+    
 }
 
 .filter-options select {
     padding: 0.75rem;
     border: 2px solid var(--border-color);
     border-radius: 5px;
-    font-size: 1rem;
-    background-color: var(--bg-white);
     cursor: pointer;
 }
 
-.filter-options select:focus {
-    outline: none;
-    border-color: var(--primary-color);
-}
-
-/* --- Auth Pages (Login/Register) --- */
+/* --- Auth (Login/Register) --- */
 .auth-section {
     padding: 4rem 0;
     min-height: 60vh;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 .auth-container {
-    max-width: 500px;
+    width: 30rem;
+    min-width: 400px;
     margin: 0 auto;
-    width: 100%;
+}
+
+@media (max-width: 400px) {
+    .auth-container {
+        width: 100%;        
+        max-width: 100%;    
+        padding: 0 ;    
+    }
 }
 
 .auth-card {
@@ -594,23 +551,18 @@ footer {
     font-size: 2rem;
 }
 
-.auth-form {
-    margin-bottom: 1.5rem;
-}
-
 .forgot-password {
     color: var(--primary-color);
     text-decoration: none;
     font-size: 0.9rem;
 }
 
-.forgot-password:hover {
-    text-decoration: underline;
-}
+.forgot-password:hover { text-decoration: underline; }
 
 .auth-footer {
     text-align: center;
     color: var(--text-light);
+    margin-top: 1.5rem;
 }
 
 .auth-footer a {
@@ -619,14 +571,8 @@ footer {
     font-weight: 600;
 }
 
-.auth-footer a:hover {
-    text-decoration: underline;
-}
-
 /* --- Profile Page --- */
-.profile-section {
-    padding: 3rem 0;
-}
+.profile-section { padding: 3rem 0; }
 
 .profile-content {
     display: flex;
@@ -634,54 +580,37 @@ footer {
     gap: 2rem;
 }
 
-.profile-card {
+.profile-card, .registered-opportunities {
     background-color: var(--bg-white);
     padding: 2rem;
     border-radius: 10px;
     box-shadow: var(--shadow);
 }
 
-.profile-card h3 {
+.profile-card h3, .registered-opportunities h3 {
     color: var(--primary-color);
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
 }
 
 .profile-info {
-    margin-bottom: 1.5rem;
-}
+     margin-bottom: 1.5rem;
+     }
 
 .info-item {
-    display: flex;
+    display: grid;
+    grid-template-columns: 120px 1fr;
     padding: 1rem 0;
     border-bottom: 1px solid var(--border-color);
+    gap: 1rem;
 }
 
 .info-item:last-child {
-    border-bottom: none;
-}
+     border-bottom: none; 
+    }
 
-.info-item strong {
-    min-width: 120px;
-    color: var(--text-dark);
-}
-
-.info-item span {
-    color: var(--text-light);
-}
-
-.registered-opportunities {
-    background-color: var(--bg-white);
-    padding: 2rem;
-    border-radius: 10px;
-    box-shadow: var(--shadow);
-}
-
-.registered-opportunities h3 {
-    color: var(--primary-color);
-    margin-bottom: 1.5rem;
-    font-size: 1.5rem;
-}
+.info-item strong { color: var(--text-dark); }
+.info-item span { color: var(--text-light); }
 
 .opportunities-header {
     display: flex;
@@ -690,14 +619,6 @@ footer {
     margin-bottom: 1.5rem;
     flex-wrap: wrap;
     gap: 1rem;
-}
-
-.opportunities-header h3 {
-    margin-bottom: 0;
-}
-
-.opportunities-header .btn {
-    margin: 0;
 }
 
 .opportunities-list-profile {
@@ -713,7 +634,8 @@ footer {
     padding: 1.5rem;
     background-color: var(--bg-light);
     border-radius: 8px;
-    border-left: 4px solid var(--primary-color);
+    /* LOGICAL PROPERTY: Auto-flips border based on direction */
+    border-inline-start: 4px solid var(--primary-color);
     flex-wrap: wrap;
     gap: 1rem;
     animation: fadeInUp 0.5s ease forwards;
@@ -733,43 +655,34 @@ footer {
     color: var(--text-light);
 }
 
-/* --- Opportunity Detail Page --- */
-.opportunity-detail-section {
-    padding: 3rem 0;
-    min-height: 60vh;
-}
+/* --- Opportunity Detail --- */
+
+.opportunity-detail-section { padding: 3rem 0; min-height: 60vh; }
 
 .back-link {
     display: inline-flex;
     align-items: center;
-    color: var(--bg-white);
+    background-color: var(--primary-color);
+    color: white;
     text-decoration: none;
     font-weight: 600;
     margin-bottom: 2rem;
-    padding: 1rem;
+    padding: 0.75rem 1.25rem;
     border-radius: 5px;
     transition: all 0.3s ease;
-    background-color: var(--primary-color);
 }
 
 .back-link:hover {
     background-color: var(--primary-dark);
-    transform: translateX(5px);
+    transform: translateX(calc(5px * var(--dir-flip, 1))); 
     box-shadow: var(--shadow-hover);
 }
-
 
 .opportunity-detail-card {
     background-color: var(--bg-white);
     border-radius: 10px;
     box-shadow: var(--shadow);
     overflow: hidden;
-}
-
-.detail-header {
-    background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-light) 100%);
-    color: white;
-    padding: 3rem 2rem;
 }
 
 .detail-header h1 {
@@ -783,6 +696,8 @@ footer {
     flex-wrap: wrap;
     gap: 1.5rem;
     font-size: 1.1rem;
+    justify-content: center;
+    margin-top: 1rem;
 }
 
 .meta-item {
@@ -798,13 +713,9 @@ footer {
     backdrop-filter: blur(10px);
 }
 
-.detail-content {
-    padding: 3rem 2rem;
-}
+.detail-content { padding: 3rem 2rem; }
 
-.detail-section {
-    margin-bottom: 3rem;
-}
+.detail-section { margin-bottom: 3rem; }
 
 .detail-section h2 {
     color: var(--primary-color);
@@ -831,7 +742,7 @@ footer {
     background-color: var(--bg-light);
     padding: 1.5rem;
     border-radius: 8px;
-    border-right: 4px solid var(--primary-color);
+    
 }
 
 .detail-info-item h3 {
@@ -843,11 +754,6 @@ footer {
     gap: 0.5rem;
 }
 
-.detail-info-item p {
-    color: var(--text-dark);
-    line-height: 1.6;
-}
-
 .registration-section {
     background-color: var(--bg-light);
     padding: 2rem;
@@ -855,9 +761,318 @@ footer {
     text-align: center;
 }
 
+/* ============================================
+   5. ABOUT PAGE STYLES
+   ============================================ */
+
+.about-section { padding: 3rem 0; }
+
+.about-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.about-card {
+    background-color: var(--bg-white);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.about-card h2 {
+    color: var(--primary-color);
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.about-card p {
+    color: var(--text-dark);
+    line-height: 1.8;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+}
+
+.values-list {
+    list-style: none;
+    padding: 0;
+}
+
+.values-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-dark);
+    line-height: 1.8;
+}
+
+.values-list li:last-child { border-bottom: none; }
+
+.values-list strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+}
+
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 1.5rem;
+}
+
+.feature-item {
+    padding: 1.5rem;
+    background-color: var(--bg-light);
+    border-radius: 8px;
+}
+
+.feature-item h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+}
 
 /* ============================================
-   5. ACCESSIBILITY & PRINT
+   6. CONTACT PAGE STYLES
+   ============================================ */
+
+.contact-section { padding: 3rem 0; }
+
+.contact-content {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    
+    margin: 0 auto;
+}
+
+.contact-card {
+    background-color: var(--bg-white);
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: var(--shadow);
+}
+
+.contact-card h3 {
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.contact-item {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.contact-item:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.contact-item strong {
+    color: var(--primary-color);
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+}
+
+.contact-form textarea {
+    resize: vertical;
+    font-family: inherit;
+}
+
+/* ============================================
+   7. 404 ERROR PAGE STYLES
+   ============================================ */
+.error-section {
+    padding: 5rem 0;
+    min-height: 60vh;
+    display: flex;
+    align-items: center;
+}
+
+.error-content {
+    text-align: center;
+    max-width: 700px;
+    margin: 0 auto;
+}
+
+.error-code {
+    font-size: 8rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    line-height: 1;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.error-content h1 {
+    font-size: 2.5rem;
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.error-content > p {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin-bottom: 2.5rem;
+    line-height: 1.6;
+}
+
+.error-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: 3rem;
+}
+
+.error-suggestions {
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 2px solid var(--border-color);
+}
+
+.error-suggestions h3 {
+    color: var(--primary-color);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+}
+
+.error-suggestions ul { list-style: none; padding: 0; }
+.error-suggestions li { margin-bottom: 0.75rem; }
+
+.error-suggestions a {
+    color: var(--primary-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+    transition: color 0.3s ease;
+}
+
+.error-suggestions a:hover {
+    color: var(--primary-dark);
+    text-decoration: underline;
+}
+
+/* ============================================
+   8. RESPONSIVE DESIGN
+   ============================================ */
+
+/* --- Tablet & Mobile Navigation --- */
+@media (max-width: 768px) {
+    .nav-container {
+        position: relative;
+    }
+
+    .hamburger { display: flex; }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--bg-white);
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        box-shadow: var(--shadow);
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease, padding 0.3s ease;
+        gap: 0;
+    }
+
+    .nav-menu.active {
+        max-height: 500px;
+        padding: 1rem 0;
+    }
+
+    .nav-menu li { width: 100%; }
+
+    .nav-menu a {
+        display: block;
+        padding: 0.75rem 2rem;
+        border-bottom: 1px solid var(--border-color);
+        /* Logical Property: Reset borders */
+        border-inline-start: 4px solid transparent;
+        border-bottom-color: var(--border-color);
+    }
+
+    .nav-menu a:hover,
+    .nav-menu a.active {
+        background-color: var(--bg-light);
+        /* LOGICAL PROPERTY: Highlight on the "start" side */
+        border-inline-start-color: var(--primary-color);
+    }
+
+    .hero-content h2 { font-size: 2rem; }
+    .hero-content p { font-size: 1rem; }
+
+    .opportunities-grid, 
+    .detail-info-grid,
+    .features-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .opportunity-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .opportunity-item .btn {
+         width: 100%;
+         }
+
+    .info-item {
+        grid-template-columns: 1fr;
+        gap: 0.25rem;
+    }
+
+    .detail-header { 
+        padding: 2rem 1.5rem; 
+    }
+    
+    .detail-header h1 {
+         font-size: 1.8rem; 
+        }
+    
+        .detail-content { 
+        padding: 2rem 1.5rem;
+     }
+    
+    .error-code { 
+        font-size: 6rem;
+     }
+
+    .error-content h1 {
+         font-size: 2rem;
+         }
+}
+
+@media (max-width: 480px) {
+    .container, .nav-container, .footer-container { padding: 0 1rem; }
+    
+    .logo h1 { font-size: 1.5rem; }
+    
+    .opportunities-header { flex-direction: column; align-items: flex-start; }
+    .opportunities-header .btn { width: 100%; }
+    
+    .hero-content h2 { font-size: 1.75rem; }
+    
+    .auth-card, .profile-card, .about-card, .contact-card { padding: 1.5rem; }
+    
+    .search-bar { flex-direction: column; }
+    
+    .error-code { font-size: 5rem; }
+}
+
+/* ============================================
+   9. ACCESSIBILITY & PRINT
    ============================================ */
 
 /* --- Focus States --- */
@@ -880,611 +1095,26 @@ select:focus-visible {
         display: none !important;
     }
 
+    body { background-color: white; }
+    .container { width: 100%; max-width: none; padding: 0; }
+
     .detail-header {
         background: white !important;
         color: black !important;
         border-bottom: 2px solid #000;
+        padding: 0;
+        text-align: start;
     }
+    
+    .detail-header h1 { color: black; }
+    .detail-text { color: black; }
 
-    .detail-info-item {
+    .detail-info-item, .contact-card, .about-card {
         border: 1px solid #000;
         page-break-inside: avoid;
+        box-shadow: none;
+        /* Remove colored borders for print */
+        border-inline-end: 1px solid #000;
+        border-inline-start: 1px solid #000;
     }
 }
-
-
-/* ============================================
-   6. RESPONSIVE DESIGN
-   ============================================ */
-
-/* --- Tablet Styles --- */
-@media (max-width: 768px) {
-    .nav-container {
-        flex-direction: row;
-        justify-content: space-between;
-        position: relative;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .nav-menu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        right: 0;
-        background-color: var(--bg-white);
-        flex-direction: column;
-        width: 100%;
-        padding: 1rem 0;
-        box-shadow: var(--shadow);
-        max-height: 0;
-        overflow: hidden;
-        transition: max-height 0.3s ease, padding 0.3s ease;
-        gap: 0;
-        margin-top: 1rem;
-    }
-
-    .nav-menu.active {
-        max-height: 500px;
-        padding: 1rem 0;
-    }
-
-    .nav-menu li {
-        width: 100%;
-    }
-
-    .nav-menu a {
-        display: block;
-        padding: 0.75rem 2rem;
-        border-bottom: 1px solid var(--border-color);
-        border-left: none;
-    }
-
-    .nav-menu a:hover,
-    .nav-menu a.active {
-        border-bottom: 1px solid var(--border-color);
-        border-left: 4px solid var(--primary-color);
-        background-color: var(--bg-light);
-    }
-
-    .hero-content h2 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1rem;
-    }
-
-    .opportunities-grid {
-        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-        gap: 1.5rem;
-    }
-
-    .filter-container {
-        flex-direction: column;
-    }
-
-    .filter-options {
-        flex-direction: column;
-    }
-
-    .filter-options select {
-        width: 100%;
-    }
-
-    .auth-card {
-        padding: 2rem;
-    }
-
-    .opportunity-item {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .opportunity-item .btn {
-        width: 100%;
-    }
-
-    .footer-content {
-        grid-template-columns: 1fr;
-    }
-
-    /* Opportunity Detail Page */
-    .detail-header {
-        padding: 2rem 1.5rem;
-    }
-
-    .detail-header h1 {
-        font-size: 1.8rem;
-    }
-
-    .detail-meta-top {
-        font-size: 0.95rem;
-        gap: 1rem;
-    }
-
-    .detail-content {
-        padding: 2rem 1.5rem;
-    }
-
-    .detail-section h2 {
-        font-size: 1.5rem;
-    }
-
-    .detail-text {
-        font-size: 1rem;
-    }
-
-    .detail-info-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .detail-info-item {
-        border-right: none;
-        border-left: 4px solid var(--primary-color);
-    }
-
-    .btn-large {
-        width: 100%;
-        min-width: auto;
-    }
-
-    .back-link {
-        margin-bottom: 1rem;
-    }
-    
-    .about-card {
-         padding: 2rem;
-     }
-
-     .about-card h2 {
-         font-size: 1.75rem;
-     }
-
-     .features-grid {
-         grid-template-columns: 1fr;
-         gap: 1.5rem;
-     }
-
-     /* Contact Page Responsive */
-     .contact-content {
-         /* No grid here anymore, just inherit column flex */
-         gap: 1.5rem;
-     }
-
-     .error-code {
-         font-size: 6rem;
-     }
-
-     .error-content h1 {
-         font-size: 2rem;
-     }
-
-     .error-actions {
-         flex-direction: column;
-     }
-
-     .error-actions .btn {
-         width: 100%;
-     }
-}
-
-/* --- Mobile Styles --- */
-@media (max-width: 480px) {
-    .container {
-        padding: 0 1rem;
-    }
-
-    .nav-container {
-        padding: 0 1rem;
-    }
-
-    .logo h1 {
-        font-size: 1.5rem;
-    }
-
-    .opportunities-header {
-        flex-direction: column;
-        align-items: flex-start;
-    }
-
-    .opportunities-header .btn {
-        width: 100%;
-    }
-
-    .hero {
-        padding: 3rem 1rem;
-    }
-
-    .hero-content h2 {
-        font-size: 1.75rem;
-    }
-
-    .hero-content p {
-        font-size: 0.95rem;
-    }
-
-    .featured-opportunities {
-        padding: 2rem 0;
-    }
-
-    .featured-opportunities h2 {
-        font-size: 1.5rem;
-        margin-bottom: 2rem;
-    }
-
-    .opportunities-grid {
-        grid-template-columns: 1fr;
-        gap: 1rem;
-    }
-
-    .page-header {
-        padding: 2rem 1rem;
-    }
-
-    .page-header h2 {
-        font-size: 1.75rem;
-    }
-
-    .search-filters {
-        padding: 1.5rem 0;
-    }
-
-    .search-bar {
-        flex-direction: column;
-    }
-
-    .search-btn {
-        width: 100%;
-    }
-
-    .auth-card {
-        padding: 1.5rem;
-        margin: 0 1rem;
-    }
-
-    .auth-card h2 {
-        font-size: 1.5rem;
-    }
-
-    .profile-card,
-    .registered-opportunities {
-        padding: 1.5rem;
-    }
-
-    .info-item {
-        flex-direction: column;
-        gap: 0.25rem;
-    }
-
-    .info-item strong {
-        min-width: auto;
-    }
-
-    .footer-container {
-        padding: 0 1rem;
-    }
-
-    /* Opportunity Detail Page */
-    .detail-header {
-        padding: 1.5rem 1rem;
-    }
-
-    .detail-header h1 {
-        font-size: 1.5rem;
-    }
-
-    .detail-content {
-        padding: 1.5rem 1rem;
-    }
-
-    .registration-section {
-        padding: 1.5rem 1rem;
-    }
-    
-    .about-card {
-         padding: 1.5rem;
-     }
-
-     .about-card h2 {
-         font-size: 1.5rem;
-     }
-
-     .contact-card {
-         padding: 1.5rem;
-     }
-
-     .error-code {
-         font-size: 5rem;
-     }
-
-     .error-content h1 {
-         font-size: 1.75rem;
-     }
-}
-
-
-/* ============================================
-   7. RTL (Right-to-Left) OVERRIDES
-   (For Arabic Language Support)
-   ============================================ */
-/* Flip hamburger animation */
-.hamburger.active span:nth-child(1) {
-    transform: rotate(45deg) translate(-5px, 5px);
-}
-
-.hamburger.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(-7px, -6px);
-}
-
-/* Flip profile page item border */
-.opportunity-item {
-    border-left: none;
-    border-right: 4px solid var(--primary-color);
-}
-
-/* Flip border on mobile menu */
-@media (max-width: 768px) {
-    .nav-menu a:hover,
-    .nav-menu a.active {
-        border-left: none;
-        border-right: 4px solid var(--primary-color);
-    }
-    
-    /* Flip detail info item border *only* on tablet/desktop RTL */
-    /* On mobile, it's already flipped by the main responsive rule */
-    .detail-info-item {
-        border-left: none;
-        border-right: 4px solid var(--primary-color);
-    }
-}
-
- /* Flip detail info item border for desktop RTL */
- .detail-info-item {
-     border-right: none;
-     border-left: 4px solid var(--primary-color);
- }
-
-/* ============================================
-   8. ABOUT PAGE STYLES
-   ============================================ */
-
-.about-section {
-     padding: 3rem 0;
- }
-
-.about-content {
-     display: flex;
-     flex-direction: column;
-     gap: 2rem;
- }
-
-.about-card {
-     background-color: var(--bg-white);
-     padding: 2.5rem;
-     border-radius: 10px;
-     box-shadow: var(--shadow);
- }
-
-.about-card h2 {
-     color: var(--primary-color);
-     font-size: 2rem;
-     margin-bottom: 1.5rem;
-     font-weight: 700;
- }
-
-.about-card p {
-     color: var(--text-dark);
-     line-height: 1.8;
-     font-size: 1.1rem;
-     margin-bottom: 1rem;
- }
-
-.values-list {
-     list-style: none;
-     padding: 0;
- }
-
-.values-list li {
-     padding: 1rem 0;
-     border-bottom: 1px solid var(--border-color);
-     color: var(--text-dark);
-     line-height: 1.8;
- }
-
-.values-list li:last-child {
-     border-bottom: none;
- }
-
-.values-list strong {
-     color: var(--primary-color);
-     display: block;
-     margin-bottom: 0.5rem;
- }
-
-.features-grid {
-     display: grid;
-     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-     gap: 2rem;
-     margin-top: 1.5rem;
- }
-
-.feature-item {
-     padding: 1.5rem;
-     background-color: var(--bg-light);
-     border-radius: 8px;
-    
- }
-
-.feature-item h3 {
-     color: var(--primary-color);
-     font-size: 1.3rem;
-     margin-bottom: 0.75rem;
- }
-
-.feature-item p {
-     color: var(--text-light);
-     font-size: 1rem;
-     margin: 0;
- }
-
-/* ============================================
-   9. CONTACT PAGE STYLES
-   ============================================ */
-
-.contact-section {
-     padding: 3rem 0;
- }
-
-/* Updated: Simple vertical stack layout */
-.contact-content {
-     display: flex;
-     flex-direction: column; /* Stack vertically */
-     gap: 2rem;
-     max-width: 800px; /* Prevent it from getting too wide */
-     margin: 0 auto; /* Center the column */
- }
-
-.contact-card {
-     background-color: var(--bg-white);
-     padding: 2rem;
-     border-radius: 10px;
-     box-shadow: var(--shadow);
- }
-
-.contact-card h3 {
-     color: var(--primary-color);
-     font-size: 1.5rem;
-     margin-bottom: 1.5rem;
-     font-weight: 700;
- }
-
-.contact-item {
-     margin-bottom: 1.5rem;
-     padding-bottom: 1.5rem;
-     border-bottom: 1px solid var(--border-color);
- }
-
-.contact-item:last-child {
-     border-bottom: none;
-     margin-bottom: 0;
-     padding-bottom: 0;
- }
-
-.contact-item strong {
-     color: var(--primary-color);
-     display: block;
-     margin-bottom: 0.5rem;
-     font-size: 1rem;
- }
-
-.contact-item p {
-     color: var(--text-dark);
-     margin: 0;
-     line-height: 1.6;
- }
-
-.contact-form textarea {
-     width: 100%;
-     padding: 0.75rem;
-     border: 2px solid var(--border-color);
-     border-radius: 5px;
-     font-size: 1rem;
-     font-family: inherit;
-     resize: vertical;
-     transition: border-color 0.3s ease;
- }
-
-.contact-form textarea:focus {
-     outline: none;
-     border-color: var(--primary-color);
- }
-
-.contact-form textarea.error {
-     border-color: var(--danger-color);
-     border-width: 2px;
- }
-
-/* ============================================
-   10. 404 ERROR PAGE STYLES
-   ============================================ */
-
-.error-section {
-     padding: 5rem 0;
-     min-height: 60vh;
-     display: flex;
-     align-items: center;
- }
-
-.error-content {
-     text-align: center;
-     max-width: 700px;
-     margin: 0 auto;
- }
-
-.error-code {
-     font-size: 8rem;
-     font-weight: 700;
-     color: var(--primary-color);
-     line-height: 1;
-     margin-bottom: 1rem;
-     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
- }
-
-.error-content h1 {
-     font-size: 2.5rem;
-     color: var(--text-dark);
-     margin-bottom: 1rem;
-     font-weight: 700;
- }
-
-.error-content > p {
-     font-size: 1.2rem;
-     color: var(--text-light);
-     margin-bottom: 2.5rem;
-     line-height: 1.6;
- }
-
-.error-actions {
-     display: flex;
-     gap: 1rem;
-     justify-content: center;
-     flex-wrap: wrap;
-     margin-bottom: 3rem;
- }
-
-.error-suggestions {
-     margin-top: 3rem;
-     padding-top: 2rem;
-     border-top: 2px solid var(--border-color);
- }
-
-.error-suggestions h3 {
-     color: var(--primary-color);
-     font-size: 1.3rem;
-     margin-bottom: 1rem;
- }
-
-.error-suggestions ul {
-     list-style: none;
-     padding: 0;
- }
-
-.error-suggestions li {
-     margin-bottom: 0.75rem;
- }
-
-.error-suggestions a {
-     color: var(--primary-color);
-     text-decoration: none;
-     font-size: 1.1rem;
-     transition: color 0.3s ease;
- }
-
-.error-suggestions a:hover {
-     color: var(--primary-dark);
-     text-decoration: underline;
- }
